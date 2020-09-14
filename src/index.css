@@ -2,3 +2,16 @@ body {
     text-align: center;
     padding: 5%;
 }
+
+.form-inline {
+    display: inline;
+}
+
+.note {
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-style: italic;
+    text-align: left;
+    padding: 8px;
+    margin: 30px;
+}
