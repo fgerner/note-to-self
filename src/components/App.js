@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Form, FormControl} from "react-bootstrap";
 import Note from "./Note";
-import {bake_cookie, read_cookie} from 'sfcookies';
+import {bake_cookie, delete_cookie, read_cookie} from 'sfcookies';
 
 const cookie_key = 'NOTES';
 
@@ -20,9 +20,14 @@ class App extends Component {
 
     submit() {
         const {notes, text} = this.state;
-        notes.push({ text});
-        this.setState({ notes});
+        notes.push({text});
+        this.setState({notes});
         bake_cookie(cookie_key, this.state.notes)
+    }
+
+    clear() {
+        delete_cookie(cookie_key);
+        this.setState({notes: []});
     }
 
     render() {
@@ -37,10 +42,12 @@ class App extends Component {
                 {
                     this.state.notes.map((note, index) => {
                         return (
-                            <Note key={index} note = { note }/>
+                            <Note key={index} note={note}/>
                         )
                     })
                 }
+                <hr/>
+                <Button onClick={() => this.clear()}>Clear Notes</Button>
             </div>
         )
     }
